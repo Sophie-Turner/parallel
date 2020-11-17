@@ -91,21 +91,29 @@ void defaultMMM()
 
 void mmm()
 {
-// The coursework task.
+	// The coursework task.
 	__m256 ymm0, ymm1, ymm2; // Wide registers for 8 fp vlaues
 	__m128 xmm0; // Wide registers for 4 fp values
 	int i, j, k;
 	float temp;
-	
-	for (j = 0; j != N; j++)
+
+	for (j = 0; j != N; j += 2) {
 		for (k = 0; k != N; k++) {
 			Btranspose[k][j] = B[j][k];
 		}
+		for (k = 0; k != N; k++) {
+			Btranspose[k][j + 1] = B[j + 1][k];
+		}
+	}
 
-	for (i = 0; i != N; i++)
-		for (j = 0; j != N; j++) {
+	for (i = 0; i != N; i++) {
+		for (j = 0; j != N; j += 2) {
+			// Common array references
+
+			// j = j
 			ymm0 = _mm256_setzero_ps();
 			for (k = 0; k != ((N / 8) * 8); k += 8) {
+
 				ymm1 = _mm256_load_ps(&A[i][k]); // Load 8 values of the arrays
 				ymm2 = _mm256_load_ps(&Btranspose[j][k]);
 				ymm0 = _mm256_fmadd_ps(ymm1, ymm2, ymm0); // Reduction (+ and *)
@@ -121,9 +129,29 @@ void mmm()
 			for (; k < N; k++) {
 				C[i][j] += A[i][k] * Btranspose[j][k];
 			}
-		}
-}
 
+			// j = j + 1
+			ymm0 = _mm256_setzero_ps();
+			for (k = 0; k != ((N / 8) * 8); k += 8) {
+
+				ymm1 = _mm256_load_ps(&A[i][k]); // Load 8 values of the arrays
+				ymm2 = _mm256_load_ps(&Btranspose[j + 1][k]);
+				ymm0 = _mm256_fmadd_ps(ymm1, ymm2, ymm0); // Reduction (+ and *)
+			}
+
+			ymm2 = _mm256_permute2f128_ps(ymm0, ymm0, 1);
+			ymm0 = _mm256_add_ps(ymm0, ymm2);
+			ymm0 = _mm256_hadd_ps(ymm0, ymm0);
+			ymm0 = _mm256_hadd_ps(ymm0, ymm0);
+			xmm0 = _mm256_extractf128_ps(ymm0, 0);
+			_mm_store_ss(&C[i][j + 1], xmm0);
+
+			for (; k < N; k++) {
+				C[i][j + 1] += A[i][k] * Btranspose[j + 1][k];
+			}
+		}
+	}
+}
 ////////////////////////////////////////////////////////////////////////////////
 
 unsigned short int compare() {
