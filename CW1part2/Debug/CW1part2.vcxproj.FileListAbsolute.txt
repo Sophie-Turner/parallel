@@ -1,0 +1,2 @@
+D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Debug\CW1part2.exe
+D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Debug\CW1part2.pdb

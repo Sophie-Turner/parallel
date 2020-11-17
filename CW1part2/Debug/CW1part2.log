@@ -1,0 +1,9 @@
+﻿  Part2.cpp
+D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Part2.cpp(56,18): warning C4244: 'initializing': conversion from '_Rep' to 'float', possible loss of data
+          with
+          [
+              _Rep=double
+          ]
+D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Part2.cpp(66,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Part2.cpp(98,8): warning C4101: 'temp': unreferenced local variable
+  CW1part2.vcxproj -> D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Debug\CW1part2.exe

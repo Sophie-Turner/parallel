@@ -1,0 +1,14 @@
+﻿  Part2.cpp
+D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Part2.cpp(56,18): warning C4244: 'initializing': conversion from '_Rep' to 'float', possible loss of data
+          with
+          [
+              _Rep=double
+          ]
+D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Part2.cpp(66,18): warning C4305: 'initializing': truncation from 'double' to 'float'
+D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Part2.cpp(98,8): warning C4101: 'temp': unreferenced local variable
+  Generating code
+  21 of 22 functions (95.5%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  CW1part2.vcxproj -> D:\documents\university\Compsci\yr3\COMP3001 Low Level\CW1part2\Release\CW1part2.exe
